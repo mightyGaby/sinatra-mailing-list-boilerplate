@@ -17,7 +17,7 @@ end
 # ** Routes **
 
 post '/subscribers' do
-  subscriber = Subscriber.create(params[:subscriber])
-  subscriber.to_json
+  @subscriber = Subscriber.create(params[:subscriber])
+  @subscriber.to_json
   redirect '/'
 end

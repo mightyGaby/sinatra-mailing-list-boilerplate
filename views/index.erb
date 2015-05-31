@@ -4,27 +4,45 @@
     <title>UrbnBike Updates</title>
 
     <link rel="stylesheet" href="/stylesheets/styles.css" media="screen">
-    <script charset="utf-8" type="text/javascript" src="/javascripts/scripts.js"></script>
-    <script charset="utf-8" type="text/javascript" src="/javascripts/jquery.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/scripts.js"></script>
 
   </head>
   <body>
 
   <h2> Sign up for updates </h2>
-  <form class="" action="/subscribers" method="post">
-    <input type="text" name="subscriber[first_name]" value=""/>
-    <input type="text" name="subscriber[last_name]" value=""/>
-    <input type="text" name="subscriber[username]" value=""/>
-
-    <input type="text" name="subscriber[email]" value=""/>
-    </br>
-    <label> <input type="checkbox" name="subscriber[updates]" value="true"/> Sign me up for app updates </label>
-    </br>
-    <label> <input type="checkbox" name="subscriber[surveys]" value="true"/> I would like to help make UrbnBike better by taking the occasional survey </label>
-    </br>
+  <form class="subscribe" action="/subscribers" method="post">
+    <label> First Name <input type="text" name="subscriber[first_name]" value=""/> </label></br>
+    <label> Last Name <input type="text" name="subscriber[last_name]" value=""/> </label></br>
+    <label> e-mail <input type="text" name="subscriber[email]" id="email"/> </label><p></p></br>
+    <!-- <label> Choose a username <input type="text" name="subscriber[username]" value=""/> </label> --></br>
+    <label> <input type="checkbox" name="subscriber[updates]" value="true"/> Sign me up for app updates </label></br>
+    <label> <input type="checkbox" name="subscriber[surveys]" value="true"/> I would like to help make UrbnBike better by taking occasional surveys on my experience </label></br>
     <input type="submit" value="Submit" />
   </form>
 
+  <script>
+    function validateEmail(email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
+    }
 
+
+    $('#email').on('keyup', function(){
+      var field = $(this);
+
+      if ( validateEmail(field.val() ) == false ){
+        $(this).css({border: 'solid 1px red'});
+        $('#subscribe').submit(function (event) {
+          event.preventDefault();
+          $('p').addClass('error')
+          $('p').html("please submit a valid e-mail")
+        })
+      } else {
+        console.log('all-ok')
+      }
+    });
+  </script>
   </body>
 </html>
