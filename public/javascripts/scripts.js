@@ -17,22 +17,19 @@
 //         $(this).css({border: 'solid 1px rgb(0, 204, 0)'});
 //       }
 //     });
-// $(documet).ready(function(){
-//   function checkEmail(email) {
-//       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-//       return re.test(email);
-//   }
-//
-//    $('#email').change(function(e) {
-//   // Check input( $( this ).val() ) for validity here
-//     var email = $(this).val();
-//     if ( checkEmail(email) ){
-//       $('p').empty();
-//       console.log(email);
-//     } else {
-//       $('p').addClass('error');
-//       $('p').text('please enter fields');
-//
-//     }
-//   });
-// });
+
+$('form').submit(function (e) {
+
+  if ($('input:text').is(":empty")) {
+    $('p').addClass('error');
+    $('p').text('please enter fields');
+  };
+  e.preventDefault();
+
+});
+
+
+function checkEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}
