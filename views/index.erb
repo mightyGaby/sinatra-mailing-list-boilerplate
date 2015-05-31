@@ -13,9 +13,10 @@
 
   <h2> Sign up for updates </h2>
   <form class="subscribe" action="/subscribers" method="post">
-    <label> First Name <input type="text" name="subscriber[first_name]" value=""/> </label></br>
-    <label> Last Name <input type="text" name="subscriber[last_name]" value=""/> </label></br>
-    <label> e-mail <input type="text" name="subscriber[email]" id="email"/> </label><p></p></br>
+    <label> First Name <input type="text" name="subscriber[first_name]"/> </label></br>
+    <label> Last Name <input type="text" name="subscriber[last_name]" /> </label></br>
+    <label> e-mail <input type="text" name="subscriber[email]" id="email"/> </label></br>
+    <p></p>
     <!-- <label> Choose a username <input type="text" name="subscriber[username]" value=""/> </label> --></br>
     <label> <input type="checkbox" name="subscriber[updates]" value="true"/> Sign me up for app updates </label></br>
     <label> <input type="checkbox" name="subscriber[surveys]" value="true"/> I would like to help make UrbnBike better by taking occasional surveys on my experience </label></br>
@@ -23,26 +24,49 @@
   </form>
 
   <script>
-    function validateEmail(email) {
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test(email);
-    }
+
+  $('form').submit(function() {
+
+    noBlanks();
+  });
+
+//VALIDATION FUNCTIONS
+
+function noBlanks(){
+  var error;
+
+  if ( !$('input').val() ) {
+       error = true
+   };
+
+   if (error) {
+        alert('there are errors')
+        return false
+   };
+}
 
 
-    $('#email').on('keyup', function(){
-      var field = $(this);
+function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}
 
-      if ( validateEmail(field.val() ) == false ){
-        $(this).css({border: 'solid 1px red'});
-        $('#subscribe').submit(function (event) {
-          event.preventDefault();
-          $('p').addClass('error')
-          $('p').html("please submit a valid e-mail")
-        })
-      } else {
-        console.log('all-ok')
-      }
-    });
+
+    // $('#email').on('keyup', function(){
+    //   var field = $(this);
+    //
+    //   if ( validateEmail(field.val() ) == false ){
+    //     console.log(field.val())
+    //     field.css({border: 'solid 1px red'});
+    //     $('#subscribe').submit(function () {
+    //       e.preventDefault();
+    //       $('p').addClass('error')
+    //       $('p').html("please submit a valid e-mail")
+    //     })
+    //   } else {
+    //     console.log('all-ok')
+    //   }
+    // });
   </script>
   </body>
 </html>
